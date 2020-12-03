@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BeneQuick Web Test</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.min.js"></script>
+
+    <script src="script/testApp.js"></script>
+
+    <style>
+        body {
+            font-size: .6rem;
+        }
+    </style>
+
+</head>
+
+
+<body ng-app="bqTestModule" ng-cloak>
+<div class="container" ng-controller="FetchController">
+
+    <h3>Member Data File Viewer App</h3>
+
+    <!-- Display your states in a drop down here -->
+    <br/>
+
+    <div>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h4 class="m"> Members from state: {{selectedState}} </h4>
+            </div>
+            <div class="col-md-6">
+                <Select class="text-bold" style="width: 70px;padding: 10px 10px;margin: 10px;"
+                        ng-options="state for state in states" ng-model="selectedState">
+                    <!--                    <option class="text-bold" value="IL" ng-selected="true">IL</option>-->
+                    <!--                    <option class="text-bold" value="MN">MN</option>-->
+                    <!--                    <option class="text-bold" value="NJ">NJ</option>-->
+                    <!--                    <option class="text-bold" value="NY">NY</option>-->
+                    <!--                    <option class="text-bold" value="OK">OK</option>-->
+                </Select>
+            </div>
+        </div>
+        <div ng-repeat="(key,value) in result">
+            <div ng-if="key == selectedState">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>City</th>
+                        <th>Address</th>
+                        <th>State</th>
+                        <th>Zip</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="row in value">
+                        <td>{{row.id}}</td>
+                        <td>{{row.firstName}}</td>
+                        <td>{{row.lastName}}</td>
+                        <td>{{row.city}}</td>
+                        <td>{{row.address}}</td>
+                        <td>{{row.state}}</td>
+                        <td>{{row.zip}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
